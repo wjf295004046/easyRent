@@ -20,8 +20,9 @@ class CreateCommentTable extends Migration
             $table->integer('order_id');
             $table->integer('landlord_id');
             $table->tinyInteger('comment_type')->comment("1:好评2:中评3:差评");
-            $table->string('comment');
+            $table->string('comment')->nullable();
             $table->string('reply')->nullable();
+            $table->tinyInteger('user_status')->comment('房客')->default(0);
             $table->tinyInteger('landlord_status')->comment("房东")->default(0);
             $table->timestamps();
         });

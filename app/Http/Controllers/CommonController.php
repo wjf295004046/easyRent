@@ -388,8 +388,7 @@ class CommonController extends Controller
         if (!$userInfo)
             $userInfo = '';
         else if ($userInfo->pic_path != '/common/mrtx.jpg' && $userInfo->id_card != '' && $userInfo->real_name != '') {
-            echo 'test';
-            return redirect()->action('HomeController@fangodng');
+            return redirect()->action('LandlordController@index');
         }
         return view('cert', [
             'user_info' => $userInfo
@@ -408,7 +407,7 @@ class CommonController extends Controller
         {
             $photo = $request->photo;
             $extension = $photo->getClientOriginalExtension();
-            if ($extension == 'png' || $extension == 'jpeg') {
+            if ($extension == 'png' || $extension == 'jpeg' || $extension == 'jpg') {
                 $file_name = 'yhtx_' . date("YmdHis") . ".png";
                 $save_path = 'images/users/' . Auth::user()->phone . "/";
                 $photo->move($save_path, $file_name);
@@ -420,7 +419,7 @@ class CommonController extends Controller
         }
         $userInfo->save();
         User::where('id', Auth::user()->id)->update(['is_landlord' => 1]);
-        return redirect()->action('HouseController@create');
+        return redirect()->action('LandlordController@index');
     }
     public function imgDeal($photo, $data, $path, $res_w = 160, $res_h = 160) {
         $x = round($data['x']);
@@ -428,5 +427,25 @@ class CommonController extends Controller
         $w = round($data['w']);
         $h = round($data['h']);
         $img = Image::make($photo)->crop($w, $h, $x, $y)->resize($res_w, $res_h)->save($path);
+    }
+
+    public function changePhoto(Request $request) {
+        $userInfo = UserDetail::where('user_id', Auth::user()->id)->first();
+        if (!$userInfo) {
+            $userInfo = new UserDetail();
+            $userInfo->user_id = Auth::user()->id;
+        }
+        $photo = $request->photo;
+        $extension = $photo->getClientOriginalExtension();
+        if ($extension == 'png' || $extension == 'jpeg' || $extension == 'jpg') {
+            $file_name = 'yhtx_' . date("YmdHis") . ".png";
+            $save_path = 'images/users/' . Auth::user()->phone . "/";
+            $photo->move($save_path, $file_name);
+            $photo = $this->imgDeal($save_path . $file_name, $request->only('x', 'y', 'w', 'h'), $save_path . $file_name);
+
+            $userInfo->pic_path = "/users/" . Auth::user()->phone . "/" . $file_name;
+        }
+        $userInfo->save();
+        return redirect()->back();
     }
 }

@@ -24,8 +24,8 @@ class OrderController extends Controller
         $this->middleware('auth');
     }
 
-    public function index() {
-        echo "订单展示页面";
+    public function index(Request $request) {
+
     }
     public function create(Request $request) {
         $house_id = $request->input("id");

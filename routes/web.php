@@ -41,11 +41,14 @@ Route::post('/common/checkrent', 'CommonController@checkRentInfo');
 Route::post('/common/saveaddress', 'CommonController@saveAddress');
 Route::get('/common/cert', 'CommonController@cert')->middleware('auth');
 Route::post('/common/certsave', 'CommonController@certSave');
+Route::post('/common/changephoto', 'CommonController@changePhoto');
 
 Route::get("/show/{opt}", 'HouseController@showSearchHouse');
+Route::get('fangdong', 'LandlordController@index');
+Route::get("fangdong/order", 'LandlordController@orderManage');
 //Route::get("/house/{id}", 'HouseController@showHouse');
 
 Route::resource("orders", 'OrderController');
-Route::resource("fangdong", 'LandlordController');
+//Route::resource("fangdong", 'LandlordController');
 Route::resource("house", 'HouseController');
 Route::get("/house/create", 'HouseController@create')->middleware('cert');

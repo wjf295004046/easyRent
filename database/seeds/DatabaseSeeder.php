@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
             ['id' => 1, 'name' => '夜乄', 'email' => '295004046@qq.com', 'phone' => '15168202013', 'password' => bcrypt('123456'), 'is_landlord' => 1, 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")]
         ]);
         Comment::insert([
-            ['id' => 1, 'user_id' => 1, 'house_id' => 1, 'order_id' => 1, 'landlord_id' => 1, 'comment_type' => 1, 'comment' => '房间很干净卫生，住的也很舒服，出门不远就是杭州大厦，吃饭购物非常方便，就是小区没有电梯有点不方便，其他都很好，房东mm也超赞，有机会还会再来！', 'reply' => '谢谢您能选择我家，欢迎再来～', 'landlord_status' => 1, 'created_at' => '2016-12-21 16:00:00', 'updated_at' => '2016-12-30 16:00:00'],
+            ['id' => 1, 'user_id' => 1, 'house_id' => 1, 'order_id' => 1, 'landlord_id' => 1, 'comment_type' => 1, 'comment' => '房间很干净卫生，住的也很舒服，出门不远就是杭州大厦，吃饭购物非常方便，就是小区没有电梯有点不方便，其他都很好，房东mm也超赞，有机会还会再来！', 'reply' => '谢谢您能选择我家，欢迎再来～','user_status' => 1, 'landlord_status' => 1, 'created_at' => '2016-12-21 16:00:00', 'updated_at' => '2016-12-30 16:00:00'],
         ]);
         RentInfo::insert([
             ['id' => 1, 'house_id' => 1, 'year' => date("Y"), 'month' => date("m"), 'detail' => serialize(array(28 => 1, 27 => 1)), 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],

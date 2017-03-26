@@ -71,7 +71,7 @@ class HouseController extends Controller
             $search_params['date'] = $search_params['startdate'] . "至" . $search_params['enddate'];
         }
 
-        $houses = $houses->where('status', 1)->orderBy("comment_num", "desc")->orderBy("price", "asc")->paginate(10);
+        $houses = $houses->where('status', 1)->orderBy("comment_num", "desc")->orderBy("price", "asc")->paginate(1);
 
         $address_arr = array();
         $api_info = array();
