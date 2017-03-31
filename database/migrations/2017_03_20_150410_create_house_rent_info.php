@@ -18,7 +18,7 @@ class CreateHouseRentInfo extends Migration
             $table->integer('house_id');
             $table->integer('year');
             $table->tinyInteger('month');
-            $table->string('detail');
+            $table->text('detail');
             $table->unique(['house_id', 'year', 'month'], 'u_house_id_month');
             $table->timestamps();
         });

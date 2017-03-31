@@ -8,6 +8,6 @@ class SMS extends Model
 {
     protected $table = "send_sms_log";
     protected $fillable = [
-        'mobile', 'verify', 'type', 'status',
+        'mobile', 'verify', 'type', 'status','result'
     ];
 }

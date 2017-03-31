@@ -21,7 +21,7 @@ class CreateUserDetail extends Migration
             $table->string('passport')->default("");
             $table->string('pic_path')->default("/common/mrtx.jpg");
             $table->string('sex')->default("");
-            $table->dateTime('birth')->nullable();
+            $table->date('birth')->nullable();
             $table->string('country')->default('中国');
             $table->string('province')->default("");
             $table->string('city')->default("");

@@ -94,21 +94,11 @@ class OrderController extends Controller
         ];
         $oCommon = new CommonController();
         $oCommon->smsRemind($sms_data, 3);
-        if (Order::create($data) && CommonController::updateRentInfo($info['house_id'], $info['num'], $info['startdate'], $info['enddate']))
-            return redirect()->action('OrderController@index');
+        CommonController::updateRentInfo($info['house_id'], $info['num'], $info['startdate'], $info['enddate']);
+        if (Order::create($data))
+            return redirect()->action('HomeController@orderManage');
         else
             return redirect()->back();
     }
-    public function show() {
 
-    }
-    public function edit() {
-
-    }
-    public function update() {
-
-    }
-    public function destory(){
-
-    }
 }

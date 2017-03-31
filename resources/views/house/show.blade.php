@@ -290,6 +290,7 @@
                                 </div>
                             </div>
                             @foreach($comments as $comment)
+                            @if($comment->user_status != 0)
                             <div class="row comment-info">
                                 <div class="col-md-3 col-sm-4 col-xs-6 comment-user">
                                     <img class="col-md-6 col-md-offset-3 col-xs-3" width="100%" src="/images/common/mrtx.jpg" alt="">
@@ -300,7 +301,7 @@
                                         {{ $comment->comment }}
                                     </p>
                                     <p>
-                                        {{ $comment->created_at }}
+                                        {{ $comment->comment_time }}
                                     </p>
                                     @if($comment->landlord_status)
                                         <span class="line"></span>
@@ -309,12 +310,13 @@
                                             {{ $comment->reply }}
                                         </p>
                                         <p>
-                                            {{ $comment->updated_at }}
+                                            {{ $comment->reply_time }}
                                         </p>
                                     @endif
                                 </div>
                             </div>
                             <span class="line"></span>
+                            @endif
                             @endforeach
                         @endif
                     </div>

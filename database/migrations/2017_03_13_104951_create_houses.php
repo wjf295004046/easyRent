@@ -25,7 +25,7 @@ class CreateHouses extends Migration
             $table->tinyInteger('max_people');
             $table->tinyInteger('status')->comment('1:上架, 2:未上架, 0: 未审核, -1:审核不通过')->default(0);
             $table->integer('sum');
-            $table->string('real_sum')->default("");
+            $table->string('reason')->default("");
             $table->string('deposit');
             $table->string('city');
             $table->integer('house_type');

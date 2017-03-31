@@ -8,6 +8,6 @@ class SMSRemind extends Model
 {
     protected $table = "send_sms_remind_log";
     protected $fillable = [
-        'mobile', 'date', 'type', 'status',
+        'mobile', 'date', 'type', 'status','result'
     ];
 }

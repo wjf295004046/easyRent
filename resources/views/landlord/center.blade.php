@@ -81,11 +81,11 @@
                 <h3 class="panel-title">评价管理</h3>
             </div>
             <div class="panel-body">
-                <h5><a href="">{{ $comment['need_landlord_comment'] }}</a> 条房东点评需完成</h5>
-                <h5><a href="">{{ $comment['need_user_comment'] }}</a> 条房客点评需完成</h5>
+                <h5><a href="{{ url('fangdong/comment?commentType=to-roomer') }}">{{ $comment['need_landlord_comment'] }}</a> 条房东点评需完成</h5>
+                <h5><a href="{{ url('fangdong/comment') }}">{{ $comment['need_user_comment'] }}</a> 条房客点评需完成</h5>
                 <h5 style="margin-top: 20px;"><b>您现阶段已拥有</b></h5>
-                <h5><a href="">{{ $comment['num_landlord_comment'] }}</a> 条您对房客的点评</h5>
-                <h5><a href="">{{ $comment['num_user_comment'] }}</a> 条房客对您的点评</h5>
+                <h5><a href="{{ url('fangdong/comment') }}">{{ $comment['num_landlord_comment'] }}</a> 条您对房客的点评</h5>
+                <h5><a href="{{ url('fangdong/comment') }}">{{ $comment['num_user_comment'] }}</a> 条房客对您的点评</h5>
             </div>
         </div>
         <div class="panel panel-default col-sm-3 stat-info" id="stat-info">

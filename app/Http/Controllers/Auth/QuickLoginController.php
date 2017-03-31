@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\SMS;
 use App\Models\User;
+use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 use Validator;
+
 
 class QuickLoginController extends Controller
 {
@@ -100,9 +102,11 @@ class QuickLoginController extends Controller
             $validator = $this->validator($request->all());
             if ($validator->passes()) {
                 event(new Registered($user = $this->create($request->all())));
-
-                $this->guard()->login($user);
+                $user_detail = new UserDetail();
+                $user_detail->user_id = $user->id;
+                $user_detail->save();
                 echo json_encode(array('code' => 0, 'redirect' => url($this->redirectTo)));
+                $this->guard()->login($user);
                 return;
             }
             else {

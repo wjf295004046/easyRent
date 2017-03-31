@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Models\SMS;
+use App\Models\UserDetail;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -70,6 +71,9 @@ class RegisterController extends Controller
             $validator = $this->validator($request->all())->validate();
             event(new Registered($user = $this->create($request->all())));
             $this->guard()->login($user);
+            $user_detail = new UserDetail();
+            $user_detail->user_id = $user->id;
+            $user_detail->save();
             echo json_encode(array('code' => 0, 'redirect' => $this->redirectTo));
             return ;
         }

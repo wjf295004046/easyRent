@@ -145,9 +145,10 @@
                                 <ul class="dropdown-menu" role="menu">
                                     @if(Auth::user()->is_landlord == 1)
                                         <li><a href="{{ url("/fangdong") }}">房东中心</a></li>
-                                        {{--<li><a href="{{ url("/") }}"></a></li>--}}
                                         <li role="separator" class="divider"></li>
                                     @endif
+                                    <li><a href="{{ url("/home") }}">房客中心</a></li>
+                                    <li role="separator" class="divider"></li>
                                     <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();

@@ -60,7 +60,11 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-sm-6 menu-item">
-                                    <a href="">我的点评</a>
+                                    @if($type == 'comment')
+                                        <b>我的点评</b>
+                                    @else
+                                        <a href="{{ url('fangdong/comment') }}">我的点评</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -70,7 +74,18 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-sm-6 menu-item">
-                                    <a href="">房源管理</a>
+                                    @if($type == 'house')
+                                        <b>房源管理</b>
+                                    @else
+                                        <a href="{{ url('fangdong/house') }}">房源管理</a>
+                                    @endif
+                                </div>
+                                <div class="col-sm-6 menu-item">
+                                    @if($type == 'address')
+                                        <b>常用地址</b>
+                                    @else
+                                        <a href="{{ url('fangdong/address') }}">常用地址</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -80,10 +95,18 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-sm-6 menu-item">
-                                    <a href="">个人资料</a>
+                                    @if($type == 'userinfo')
+                                        <b>个人资料</b>
+                                    @else
+                                        <a href="{{ url('fangdong/userinfo') }}">个人资料</a>
+                                    @endif
                                 </div>
                                 <div class="col-sm-6 menu-item">
-                                    <a href="">密码修改</a>
+                                    @if($type == 'modifypwd')
+                                        <b>密码修改</b>
+                                    @else
+                                        <a href="{{ url('fangdong/modifypwd') }}">密码修改</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>

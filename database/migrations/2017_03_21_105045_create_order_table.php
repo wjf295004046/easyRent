@@ -20,8 +20,8 @@ class CreateOrderTable extends Migration
             $table->integer('house_id');
             $table->tinyInteger('status')->comment("0:无效 1:审核中 2: 订单确认 3:订单进行中 4:订单完成 5:订单取消");
             $table->tinyInteger('comment_status')->default(0);
-            $table->dateTime('startdate');
-            $table->dateTime('enddate');
+            $table->date('startdate');
+            $table->date('enddate');
             $table->string("order_owner");
             $table->string("owner_phone");
             $table->string("number");

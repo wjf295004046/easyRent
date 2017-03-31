@@ -18,8 +18,10 @@ class CommonController extends Controller
     public function getVerify(Request $request) {
         $mobile = $request->input('phone');
         $verify = rand(100000, 999999);
-        $res = $this->sendSMS(array('mobile' => $mobile, 'verify' => $verify));
-        $res_arr = json_decode($res);
+        $res = ' ';
+        $res_arr = ' ';
+//        $res = $this->sendSMS(array('mobile' => $mobile, 'verify' => $verify));
+//        $res_arr = json_decode($res);
         print_r($res_arr);
         if (isset($res_arr->errorno) || isset($res_arr->errormsg))
             $status = 0;
@@ -35,10 +37,11 @@ class CommonController extends Controller
         SMS::create($data);
     }
     public function smsRemind($data, $type) {
-//        $res = $this->sendSMS($data, $type);
-//        $res_arr = json_decode($res);
+
         $res = '';
         $res_arr = '';
+//        $res = $this->sendSMS($data, $type);
+//        $res_arr = json_decode($res);
         if (isset($res_arr->errorno) || isset($res_arr->errormsg))
             $status = 0;
         else
@@ -356,6 +359,241 @@ class CommonController extends Controller
                                 $detail[$k] += $number;
                             else
                                 $detail[$k] = $number;
+                        }
+                        if ($rentInfo){
+                            $rentInfo->detail = serialize($detail);
+                            $rentInfo->save();
+
+                        }
+                        else {
+                            $rentInfo = new RentInfo();
+                            $rentInfo->year = $i;
+                            $rentInfo->month = $j;
+                            $rentInfo->house_id = $house_id;
+                            $rentInfo->detail = serialize($detail);
+                            $rentInfo->save();
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public static function updateRentInfoReduce($house_id, $number, $startdate, $enddate){
+        $startdate = strtotime($startdate);
+        $enddate = strtotime($enddate);
+        $sYear = date("Y", $startdate);
+        $eYear = date("Y", $enddate);
+        $sMonth = date("m", $startdate);
+        $eMonth = date("m", $enddate);
+        $sDay = date("d", $startdate);
+        $eDay = date("d", $enddate);
+        $rentInfo = RentInfo::where("house_id", $house_id);
+        if ($sYear == $eYear) {
+            $rentInfo = $rentInfo->where("year", $sYear);
+            if ($sMonth == $eMonth) {
+                $rentInfo = $rentInfo->where("month", $sMonth)->first();
+                if ($rentInfo){
+                    $detail = unserialize($rentInfo->detail);
+                    for ($i = $sDay; $i <= $eDay; $i++) {
+                        if (isset($detail[$i]))
+                            $detail[$i] -= $number;
+                    }
+                    $rentInfo->detail = serialize($detail);
+                    $rentInfo->save();
+                }
+                else {
+                    $detail = array();
+                    for ($i = $sDay; $i <= $eDay; $i++) {
+                        if (isset($detail[$i]))
+                            $detail[$i] -= $number;
+                    }
+                    $rentInfo = new RentInfo();
+                    $rentInfo->year = $sYear;
+                    $rentInfo->month = $sMonth;
+                    $rentInfo->house_id = $house_id;
+                    $rentInfo->detail = serialize($detail);
+                    $rentInfo->save();
+                }
+
+            }
+            else {
+                for ($i = $sMonth; $i <= $eMonth; $i++){
+                    $t = date("t", strtotime($sYear . "-" . $i . "-01"));
+                    $rentInfo = $rentInfo->where("month", $i)->first();
+                    if ($rentInfo)
+                        $detail = unserialize($rentInfo->detail);
+                    else
+                        $detail = array();
+
+                    if ($i != $eMonth && $i != $sMonth){
+                        for ($j = 1; $j <= $t; $j++) {
+                            if (isset($detail[$j]))
+                                $detail[$j] -= $number;
+                        }
+                        if ($rentInfo){
+                            $rentInfo->detail = serialize($detail);
+                            $rentInfo->save();
+
+                        }
+                        else {
+                            $rentInfo = new RentInfo();
+                            $rentInfo->year = $sYear;
+                            $rentInfo->month = $i;
+                            $rentInfo->house_id = $house_id;
+                            $rentInfo->detail = serialize($detail);
+                            $rentInfo->save();
+
+                        }
+                    }
+                    elseif ($i == $sMonth) {
+                        for ($j = $sDay; $j <= $t; $j++){
+                            if (isset($detail[$j]))
+                                $detail[$j] -= $number;
+                        }
+                        if ($rentInfo){
+                            $rentInfo->detail = serialize($detail);
+                            $rentInfo->save();
+                        }
+                        else {
+                            $rentInfo = new RentInfo();
+                            $rentInfo->year = $sYear;
+                            $rentInfo->month = $sMonth;
+                            $rentInfo->house_id = $house_id;
+                            $rentInfo->detail = serialize($detail);
+                            $rentInfo->save();
+                        }
+                    }
+                    else {
+                        for ($j = 1; $j <= $eDay; $j++) {
+                            if (isset($detail[$j]))
+                                $detail[$j] -= $number;
+                        }
+                        if ($rentInfo){
+                            $rentInfo->detail = serialize($detail);
+                            $rentInfo->save();
+
+                        }
+                        else {
+                            $rentInfo = new RentInfo();
+                            $rentInfo->year = $sYear;
+                            $rentInfo->month = $eMonth;
+                            $rentInfo->house_id = $house_id;
+                            $rentInfo->detail = serialize($detail);
+                            $rentInfo->save();
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            for ($i = $sYear; $i <= $eYear; $i++) {
+                $rentInfo = $rentInfo->where("year", $i);
+                if ($i == $sYear) {
+                    for ($j = $sMonth; $j <= 12; $j++) {
+                        $rentInfo = $rentInfo->where("month", $j)->first();
+                        $t = date("t", strtotime($sYear . "-" . $j . "-01"));
+                        if ($rentInfo)
+                            $detail = unserialize($rentInfo->detail);
+                        else
+                            $detail = array();
+                        if ($j == $sMonth) {
+                            for($k = $sDay; $k <= $t; $k++)
+                            {
+                                if (isset($detail[$k]))
+                                    $detail[$k] -= $number;
+                            }
+                            if ($rentInfo){
+                                $rentInfo->detail = serialize($detail);
+                            }
+                            else {
+                                $rentInfo = new RentInfo();
+                                $rentInfo->year = $sYear;
+                                $rentInfo->month = $sMonth;
+                                $rentInfo->house_id = $house_id;
+                                $rentInfo->detail = serialize($detail);
+                            }
+                        }
+                        else {
+                            for ($k = 1; $k <= $t; $k++) {
+                                if (isset($detail[$k]))
+                                    $detail[$k] -= $number;
+                            }
+                            if ($rentInfo){
+                                $rentInfo->detail = serialize($detail);
+                            }
+                            else {
+                                $rentInfo = new RentInfo();
+                                $rentInfo->year = $sYear;
+                                $rentInfo->month = $j;
+                                $rentInfo->house_id = $house_id;
+                                $rentInfo->detail = serialize($detail);
+                            }
+                        }
+                    }
+                }
+                elseif ($i == $eYear) {
+                    for ($j = 1; $j <= $eMonth; $j++) {
+                        $rentInfo = $rentInfo->where("month", $j)->first();
+                        $t = date("t", strtotime($sYear . "-" . $j . "-01"));
+                        if ($rentInfo)
+                            $detail = unserialize($rentInfo->detail);
+                        else
+                            $detail = array();
+                        if ($j == $eMonth) {
+                            for ($k = 1; $k <= $eDay; $k++) {
+                                if (isset($detail[$i]))
+                                    $detail[$k] -= $number;
+                            }
+                            if ($rentInfo){
+                                $rentInfo->detail = serialize($detail);
+                                $rentInfo->save();
+
+                            }
+                            else {
+                                $rentInfo = new RentInfo();
+                                $rentInfo->year = $eYear;
+                                $rentInfo->month = $eMonth;
+                                $rentInfo->house_id = $house_id;
+                                $rentInfo->detail = serialize($detail);
+                                $rentInfo->save();
+
+                            }
+                        }
+                        else {
+                            for ($k = 1; $k <= $t; $k++) {
+                                if (isset($detail[$i]))
+                                    $detail[$k] -= $number;
+                            }
+                            if ($rentInfo){
+                                $rentInfo->detail = serialize($detail);
+                                $rentInfo->save();
+
+                            }
+                            else {
+                                $rentInfo = new RentInfo();
+                                $rentInfo->year = $eYear;
+                                $rentInfo->month = $j;
+                                $rentInfo->house_id = $house_id;
+                                $rentInfo->detail = serialize($detail);
+                                $rentInfo->save();
+
+                            }
+                        }
+                    }
+                }
+                else {
+                    for ($j = 1; $j <= 12; $j++) {
+                        $rentInfo = $rentInfo->where("month", $j)->first();
+                        $t = date("t", strtotime($sYear . "-" . $j . "-01"));
+                        if ($rentInfo)
+                            $detail = unserialize($rentInfo->detail);
+                        else
+                            $detail = array();
+                        for ($k = 1; $k <= $t; $k++) {
+                            if (isset($detail[$k]))
+                                $detail[$k] -= $number;
                         }
                         if ($rentInfo){
                             $rentInfo->detail = serialize($detail);

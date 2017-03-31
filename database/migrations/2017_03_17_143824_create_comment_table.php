@@ -24,6 +24,8 @@ class CreateCommentTable extends Migration
             $table->string('reply')->nullable();
             $table->tinyInteger('user_status')->comment('房客')->default(0);
             $table->tinyInteger('landlord_status')->comment("房东")->default(0);
+            $table->dateTime('comment_time')->nullable();
+            $table->dateTime('reply_time')->nullable();
             $table->timestamps();
         });
     }

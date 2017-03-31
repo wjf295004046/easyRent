@@ -71,7 +71,7 @@ class HouseController extends Controller
             $search_params['date'] = $search_params['startdate'] . "至" . $search_params['enddate'];
         }
 
-        $houses = $houses->where('status', 1)->orderBy("comment_num", "desc")->orderBy("price", "asc")->paginate(1);
+        $houses = $houses->where('status', 1)->orderBy("comment_num", "desc")->orderBy("price", "asc")->paginate(10);
 
         $address_arr = array();
         $api_info = array();
@@ -112,11 +112,11 @@ class HouseController extends Controller
         $favorable_rate = 0;
         $comments_count = ['good' => 0, 'mid' => 0, 'bad' => 0];
         if ($houseInfo->comment_num != 0) {
-            $comments = Comment::select("users.phone", "comments.id", "comment_type", "comment", "reply", "landlord_status", "comments.created_at", "comments.updated_at")->where("house_id", $houseInfo->id)->join("users", "users.id", "comments.user_id")->orderBy('comments.created_at', 'desc')->get();
+            $comments = Comment::select("users.phone", "comments.id", "comment_type", "comment", "reply", "landlord_status", "comments.comment_time", "comments.reply_time", "comments.user_status")->where("house_id", $houseInfo->id)->join("users", "users.id", "comments.user_id")->orderBy('comments.created_at', 'desc')->get();
             foreach ($comments as $comment) {
                 if ($comment->comment_type == 1)
                     $comments_count['good']++;
-                elseif ($comments_count->comment_type == 2)
+                elseif ($comment->comment_type == 2)
                     $comments_count['mid']++;
                 else
                     $comments_count['bad']++;
