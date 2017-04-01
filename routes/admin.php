@@ -25,6 +25,10 @@ Route::get('index', ['as' => 'admin.index', 'uses' => function () {
 
 
 Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () {
+    //点评管理路由
+    Route::get('comment/index', ['as' => 'admin.comment.index', 'uses' => 'CommentController@index']);
+    Route::post('comment/delete', ['as' => 'admin.comment.delete', 'uses' => 'CommentController@delete']);
+    Route::post('comment/{id}', ['as' => 'admin.comment.show', 'uses' => 'CommentController@show']);
 
     //权限管理路由
     Route::get('permission/{cid}/create', ['as' => 'admin.permission.create', 'uses' => 'PermissionController@create']);

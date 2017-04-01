@@ -59,8 +59,6 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
     <div class="modal fade" id="modal-delete" tabIndex="-1">
         <div class="modal-dialog modal-warning">
             <div class="modal-content">
@@ -89,6 +87,8 @@
 
 
             </div>
+        </div>
+    </div>
             @stop
 
             @section('js')
