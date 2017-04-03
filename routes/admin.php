@@ -30,6 +30,14 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
     Route::post('comment/delete', ['as' => 'admin.comment.delete', 'uses' => 'CommentController@delete']);
     Route::post('comment/{id}', ['as' => 'admin.comment.show', 'uses' => 'CommentController@show']);
 
+    //房源审核路由
+    Route::get('house/{id}/show', ['as' => 'admin.house.show', 'uses' => 'HouseController@show']);
+    Route::get('house/{id}/upload', ['as' => 'admin.house.upload', 'uses' => 'HouseController@upload']);
+    Route::get('house/index', ['as' => 'admin.house.index', 'uses' => 'HouseController@index']);
+    Route::post('house/index', ['as' => 'admin.house.index', 'uses' => 'HouseController@index']);
+    Route::post('house/{id}', ['as' => 'admin.house.edit', 'uses' => 'HouseController@eidt']);
+
+
     //权限管理路由
     Route::get('permission/{cid}/create', ['as' => 'admin.permission.create', 'uses' => 'PermissionController@create']);
     Route::get('permission/manage', ['as' => 'admin.permission.manage', 'uses' => 'PermissionController@index']);

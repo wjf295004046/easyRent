@@ -33,7 +33,11 @@
             @foreach($houses as $house)
                 <tr>
                     <td><a href="javascript:void(0)" onclick="showHouse({{ $house->id }})">{{ $house->name }}</a></td>
-                    <td><img src="/images/houses{{ explode(",", $house->pic_path)[0] }}.jpg_90x60c.jpg" width="90px" alt=""></td>
+                    <td>
+                        @if($house->pic_path != "")
+                        <img src="/images/houses{{ explode(",", $house->pic_path)[0] }}.jpg_90x60c.jpg" width="90px" alt="">
+                        @endif
+                    </td>
                     <td>{{ $house->created_at }}</td>
                     @if($house->status == -1)
                         <td>审核不通过</td>
@@ -46,13 +50,13 @@
                     @endif
                     <td>
                         @if($house->status == 1)
-                            <button class="btn btn-warning btn-sm">下架</button>
+                            <button class="btn btn-warning btn-xs"{{ $has_orders[$house->id] == 1 ? 'disabled="disabled"' : "" }} onclick="updateHouseStatus({{ $house->id }}, 2)">下架</button>
                             <br>
                         @elseif($house->status == 2)
-                            <button class="btn btn-success btn-sm">上架</button>
+                            <button class="btn btn-success btn-xs" onclick="updateHouseStatus({{ $house->id }}, 1)">上架</button>
                             <br>
                         @endif
-                        <button type="button" class="btn btn-info btn-sm" onclick="showEditHouse({{ $house->id }})">修改</button>
+                        <button type="button" class="btn btn-info btn-xs" onclick="showEditHouse({{ $house->id }})">修改</button>
                     </td>
                 </tr>
             @endforeach
@@ -266,6 +270,20 @@
                 reason: ''
             }
         });
+        function updateHouseStatus(id, status) {
+            $.ajax({
+                url: "{{ url("fangdong/edithouse") }}",
+                type: "post",
+                headers: { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
+                data: {'id': id, 'status': status},
+                success:function (data) {
+                    if (data == '修改成功'){
+                        window.location.reload();
+
+                    }
+                }
+            })
+        }
 
         function showEditHouse(id) {
             $.ajax({

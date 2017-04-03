@@ -76,9 +76,19 @@ class LandlordController extends Controller
     }
     public function houseList(Request $request) {
         $houseInfo = House::where("landlord_id", Auth::user()->id)->paginate(10);
+        $has_orders = [];
+        foreach ($houseInfo as $house)
+        {
+            $order = Order::where("house_id", $house->id)->where("status", ">", "0")->where("status", "<", "4")->first();
+            if ($order)
+                $has_orders[$house->id] = 1;
+            else
+                $has_orders[$house->id] = 0;
+        }
         return view("landlord.house", [
             'type' => 'house',
             'houses' => $houseInfo,
+            'has_orders' => $has_orders
         ]);
     }
     public function userInfo(Request $request){

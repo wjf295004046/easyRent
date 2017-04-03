@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Cache, Event;
+use App\Events\permChangeEvent;
 use App\Models\House\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,6 +34,14 @@ class CommentController extends Controller
         Comment::where("id", $id)->update([
             'user_status' => 0,
         ]);
+        $comment = Comment::select("comments.*", "users.name")
+            ->where("comments.id", $id)
+            ->join("users", "users.id", "comments.user_id")
+            ->first();
+        $comment_type = $comment->comment_type == 2 ? "中评" : "差评";
+        Event::fire(new permChangeEvent());
+        event(new \App\Events\userActionEvent('\App\Models\House\Comment', $id, 2, '删除了用户' . $comment->name . "的" . $comment_type . ':' . $comment->comment ));
+
         return redirect()->back()->with('success', '删除成功');
     }
 }
