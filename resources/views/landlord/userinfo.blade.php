@@ -338,7 +338,7 @@
             }
 
             if (subList) {
-                var contentSub =new Option('--请选择--');
+                var contentSub =new Option('');
                 for (var i = 0, l = subList.length; i < l; i++) {
                     var name = subList[i].name;
                     var levelSub = subList[i].level;

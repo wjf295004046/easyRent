@@ -229,7 +229,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="max_people">标题</label>
                     <div class="col-sm-8">
-                        <input type="text" maxlength="4" class="form-control" name="name" required>
+                        <input type="text" maxlength="20" class="form-control" name="name" required>
                     </div>
                 </div>
                 <div class="form-group">

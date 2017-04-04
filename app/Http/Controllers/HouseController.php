@@ -170,7 +170,7 @@ class HouseController extends Controller
         $data['bed_type'] = rtrim($temp, ",");
         $data['supporting_facilities'] = implode(",", $data['support_facility']);
         if (House::create($data)) {
-            return redirect()->action('HouseController@index');
+            return redirect()->action('LandlordController@houseList');
         }
     }
 }

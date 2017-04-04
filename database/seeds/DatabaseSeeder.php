@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//         $this->call(HouseSeeder::class);
+        $this->call(AdminInitSeeder::class);
         ShowIndex::insert([
             ['id' => 1, 'title' => '北京', 'pic_path' => '/common/beijing.jpg', 'target' => '/beijing', 'type' => 'city', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
             ['id' => 2, 'title' => '上海', 'pic_path' => '/common/shanghai.jpg', 'target' => '/shanghai', 'type' => 'city', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
@@ -34,23 +34,13 @@ class DatabaseSeeder extends Seeder
             ['id' => 10, 'title' => '沿海第一排，临近鼓浪屿', 'pic_path' => "/houses/exp2/slide.jpg", 'desc' => '厦门豪华夜景房', 'target' => '/house/2', 'extra' => serialize(array('house_id' => 2)), 'type' => 'slide', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
             ['id' => 11, 'title' => '西安尚可民宿，凤城五路', 'pic_path' => "/houses/exp3/slide.jpg", 'desc' => '90平米两居室套房', 'target' => '/house/3', 'extra' => serialize(array('house_id' => 3)), 'type' => 'slide', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
         ]);
-        City::insert([
-            ['id' => 1, 'name' => '北京', 'pinyin' => 'beijing', 'group' => 'ABCDEFG', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
-            ['id' => 2, 'name' => '上海', 'pinyin' => 'shanghai', 'group' => 'PQRSTUV', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
-            ['id' => 3, 'name' => '成都', 'pinyin' => 'chengdu', 'group' => 'ABCDEFG', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
-            ['id' => 4, 'name' => '三亚', 'pinyin' => 'sanya', 'group' => 'WXYZ', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
-            ['id' => 5, 'name' => '重庆', 'pinyin' => 'chongqing', 'group' => 'ABCDEFG', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
-            ['id' => 6, 'name' => '西安', 'pinyin' => 'xian', 'group' => 'WXYZ', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
-            ['id' => 7, 'name' => '杭州', 'pinyin' => 'hangzhou', 'group' => 'HIJKLMNO', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
-            ['id' => 8, 'name' => '厦门', 'pinyin' => 'xiamen', 'group' => 'WXYZ', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
-        ]);
         Address::insert([
-            ['id' => 1, 'user_id' => 1, 'province' => '浙江', 'city' => '杭州', 'area' => '拱墅区', 'address' => '浙江大学城市学院', 'detail' => '明德楼', 'co_ordinates' => '120.184356,30.242367', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
-            ['id' => 2, 'user_id' => 1, 'province' => '浙江', 'city' => '杭州', 'area' => '拱墅区', 'address' => '浙江大学城市学院', 'detail' => '明德楼', 'co_ordinates' => '120.142477,30.318977', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
-            ['id' => 3, 'user_id' => 1, 'province' => '浙江', 'city' => '杭州', 'area' => '拱墅区', 'address' => '浙江大学城市学院', 'detail' => '明德楼', 'co_ordinates' => '120.154751,30.307492', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
+            ['id' => 1, 'user_id' => 1, 'province' => '浙江省', 'city' => '杭州市', 'area' => '拱墅区', 'address' => '浙江大学城市学院', 'detail' => '明德楼', 'co_ordinates' => '120.184356,30.242367', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
+            ['id' => 2, 'user_id' => 1, 'province' => '浙江省', 'city' => '杭州市', 'area' => '拱墅区', 'address' => '浙江大学城市学院', 'detail' => '明德楼', 'co_ordinates' => '120.142477,30.318977', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
+            ['id' => 3, 'user_id' => 1, 'province' => '浙江省', 'city' => '杭州市', 'area' => '拱墅区', 'address' => '浙江大学城市学院', 'detail' => '明德楼', 'co_ordinates' => '120.154751,30.307492', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],
         ]);
         UserDetail::insert([
-            ['id' => 1, 'user_id' => 1, 'real_name' => '王剑峰', 'id_card' => '331081199506073511', 'sex' => '男', 'birth' => '1995-06-07', 'province' => '浙江', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")]
+            ['id' => 1, 'user_id' => 1, 'real_name' => '王剑峰', 'id_card' => '331081199506073511', 'sex' => '男', 'birth' => '1995-06-07', 'province' => '浙江省', 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")]
         ]);
         House::insert([
             ['id' => 1, 'name' => '新国际博览中心|迪士尼|11号线地铁', 'price' => 500, 'landlord_id' => 1, 'address_id' => 1, 'status' => 1, 'sum' => 1, 'pic_path' => "/exp1/house1,/exp1/house2,/exp1/house3,/exp1/house4,/exp1/house5,/exp1/house6,/exp1/house7", 'city' => 'hangzhou', 'max_people' => 4, 'deposit' => '200', 'house_type' => 1, 'house_type_detail' => '1,1,1,1,1', 'house_area' => 100, 'rent_type' => 1, 'bed_type' => '1:2:1.8:2.0,2:1:1.8:2.0', 'change_bed' => 1, 'supporting_facilities' => '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21', 'desc' => "测试", 'internal_situation' => '内部设施', 'traffic_condition' => '交通情况', 'peripheral_condition' => '周边设施', 'cook_fee' => '20', 'clean_fee' => '20', 'other_fee' => '其他费用', 'comment_num' => 1, 'created_at' => date("Y-m-d"), 'updated_at' => date("Y-m-d")],

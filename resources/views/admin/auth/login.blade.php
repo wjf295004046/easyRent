@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>用户登录 | BigPang</title>
+    <title>用户登录 | 宜租短租</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -29,11 +29,11 @@
 @include('admin.partials.success')
 <div class="login-box">
     <div class="login-logo">
-        <a><b>Big</b>Pang</a>
+        <a><img src="/images/common/logo.gif" alt=""></a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">万事登录难</p>
+        <p class="login-box-msg">后台管理登录</p>
 
         <form action="{{ url('/admin/login') }}" method="post">
             {!! csrf_field() !!}
