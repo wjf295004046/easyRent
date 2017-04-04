@@ -11,13 +11,13 @@ use Illuminate\Http\Request;
 class IndexController extends Controller
 {
     public function index() {
-        $slides = ShowIndex::where('type', 'slide')->get();
+        $slides = ShowIndex::where('type', 'slide')->where("is_valid", 1)->get();
         foreach ($slides as $index => $slide) {
             $extra = unserialize($slide->extra);
             $house_id = $extra['house_id'];
             $price[$slide->id] = House::select("price")->where('id', $house_id)->first()->price;
         }
-        $hotcitys = ShowIndex::where('type', 'city')->orderBy('updated_at', 'desc')->take(8)->get();
+        $hotcitys = ShowIndex::where('type', 'city')->where("is_valid", 1)->orderBy('updated_at', 'desc')->take(8)->get();
         $hothouses = House::where("status", 1)->orderBy("comment_num", 'desc')->take(6)->get();
         $landlord_info = array();
         $address_info = array();

@@ -21,6 +21,7 @@ class CreateShowIndexinfo extends Migration
             $table->string('target');
             $table->string('desc')->default("");
             $table->string('extra')->default("");
+            $table->tinyInteger('is_valid')->default(1)->comment("1: 有效 2：无效");
             $table->timestamps();
         });
     }

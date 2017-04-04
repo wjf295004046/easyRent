@@ -1,6 +1,6 @@
 @extends('admin.layouts.base')
 
-@section('title','控制面板')
+@section('title','中差评列表')
 
 @section('pageHeader','控制面板')
 
@@ -36,9 +36,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($comments as $comment)
+                        @foreach($comments as $index => $comment)
                             <tr>
-                                <td>{{ $comment->id }}</td>
+                                <td>{{ $index + 1 }}</td>
                                 <td>{{ $comment->name }}</td>
                                 <td>{{ $comment->comment_type == 2 ? '中评' : '差评' }}</td>
                                 <td>{{ $comment->comment }}</td>

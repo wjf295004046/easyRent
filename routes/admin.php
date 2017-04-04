@@ -37,6 +37,19 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
     Route::post('house/index', ['as' => 'admin.house.index', 'uses' => 'HouseController@index']);
     Route::post('house/{id}', ['as' => 'admin.house.edit', 'uses' => 'HouseController@eidt']);
 
+    //首页轮播路由
+    Route::get('slide/{id}/edit',['as' => 'admin.slide.edit', 'uses' => 'SlideController@edit']);
+    Route::get('slide/create',['as' => 'admin.slide.create', 'uses' => 'SlideController@create']);
+    Route::get('slide/index',['as' => 'admin.slide.index', 'uses' => 'SlideController@index']);
+    Route::post('slide/index',['as' => 'admin.slide.index', 'uses' => 'SlideController@index']);
+    Route::post('slide/{id?}',['as' => 'admin.slide.store', 'uses' => 'SlideController@store']);
+
+    //首页推荐城市路由
+    Route::get('city/{id}/edit',['as' => 'admin.city.edit', 'uses' => 'CityController@edit']);
+    Route::get('city/create',['as' => 'admin.city.create', 'uses' => 'CityController@create']);
+    Route::get("city/index", ['as' => 'admin.city.index', 'uses' => 'CityController@index']);
+    Route::post("city/index", ['as' => 'admin.city.index', 'uses' => 'CityController@index']);
+    Route::post('city/{id?}',['as' => 'admin.city.store', 'uses' => 'CityController@store']);
 
     //权限管理路由
     Route::get('permission/{cid}/create', ['as' => 'admin.permission.create', 'uses' => 'PermissionController@create']);

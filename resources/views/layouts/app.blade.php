@@ -38,16 +38,17 @@
     <style>
         html,body {
             min-height: 100%;
-            height: 100%;
+            /*height: 100%;*/
             background-color: #efefef;
         }
         #app {
             min-height: 100%;
             height: auto;
+            /*margin-bottom: 120px;*/
             /*height: 100%;*/
         }
         footer {
-            position: relative;
+            /*position: relative;*/
             clear: both;
             margin-top: -120px;
             height: 120px;
@@ -184,6 +185,7 @@
         </nav>
 
         @yield('content')
+        <div style="margin-bottom: 120px;"></div>
         <div class="hidden" id="totop" onclick="toTop()">
             <a href="javascript:void(0)" >
                 <img src="/images/common/top.png" alt="">
