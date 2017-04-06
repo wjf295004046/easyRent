@@ -189,7 +189,7 @@ class LandlordController extends Controller
     }
     public function editUserInfo(Request $request) {
         $info = $request->all();
-        if ($info['birth'] == '')
+        if (isset($info['birth']) && $info['birth'] == '')
             unset($info['birth']);
         UserDetail::where("user_id", Auth::user()->id)->update($info);
     }

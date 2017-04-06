@@ -20,8 +20,8 @@ class CommonController extends Controller
         $verify = rand(100000, 999999);
         $res = ' ';
         $res_arr = ' ';
-//        $res = $this->sendSMS(array('mobile' => $mobile, 'verify' => $verify));
-//        $res_arr = json_decode($res);
+        $res = $this->sendSMS(array('mobile' => $mobile, 'verify' => $verify));
+        $res_arr = json_decode($res);
         print_r($res_arr);
         if (isset($res_arr->errorno) || isset($res_arr->errormsg))
             $status = 0;
@@ -40,8 +40,8 @@ class CommonController extends Controller
 
         $res = '';
         $res_arr = '';
-//        $res = $this->sendSMS($data, $type);
-//        $res_arr = json_decode($res);
+        $res = $this->sendSMS($data, $type);
+        $res_arr = json_decode($res);
         if (isset($res_arr->errorno) || isset($res_arr->errormsg))
             $status = 0;
         else
