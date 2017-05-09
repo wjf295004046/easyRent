@@ -47,7 +47,7 @@
             /*margin-bottom: 120px;*/
             /*height: 100%;*/
         }
-        footer {
+        #footer {
             /*position: relative;*/
             clear: both;
             margin-top: -120px;
@@ -57,10 +57,10 @@
             background: grey;
             color: whitesmoke;
         }
-        footer a {
+        #footer a {
             color: whitesmoke;
         }
-        footer a:hover {
+        #footer a:hover {
             text-decoration: none;
         }
         .carousel-fade .carousel-inner .item{
@@ -90,10 +90,10 @@
         #totop { z-index: 100; width: 50px; height: 50px; position: fixed;right: 20px; bottom: 100px;}
         .line {border-top: 1px solid #ccc; width: 100%;display: block;margin-bottom: 10px}
         @media screen and (max-width: 768px) {
-            footer {
+            #footer {
                 margin-top: 0px;
             }
-            footer p{
+            #footer p{
                 font-size: 10px;
             }
         }
@@ -192,7 +192,7 @@
             </a>
         </div>
     </div>
-    <footer>
+    <div id="footer">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4 col-md-offset-2 col-sm-6 col-xs-6">
@@ -214,7 +214,7 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
     <!-- Scripts -->
 
     <script src="/bootstrap/js/bootstrap.min.js"></script>
