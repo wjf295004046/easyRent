@@ -302,8 +302,8 @@
         map.on("click", function () {
             map.clearInfoWindow();
         })
-        {{--var mapCity = getCityName('{{ $search_params['city'] }}')--}}
-        {{--map.setCity(mapCity);--}}
+        var mapCity = getCityName('{{ $search_params['city'] }}')
+        map.setCity(mapCity);
 //        map.clearMap();  // 清除地图覆盖物
         var markers = [
                 @foreach($addresses as $index => $address)
