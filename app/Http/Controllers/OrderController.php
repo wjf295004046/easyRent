@@ -47,18 +47,20 @@ class OrderController extends Controller
         $houseInfo = House::select("landlord_id", "price")->where("id", $info['house_id'])->first();
         $sum_people = 0;
         $livers = '';
-        foreach ($info['liver'] as $liver) {
-            if (isset($liver['checked'])) {
-                $oliver = Liver::find($liver['checked']);
-                if ($liver['name'] != '')
-                    $oliver->name = $liver['name'];
-                if ($liver['idcard'] != '' && strlen($liver['idcard']) == 18)
-                    $oliver->idcard = $liver['idcard'];
-                if ($liver['phone'] != '')
-                    $oliver->phone = $liver['phone'];
-                $oliver->save();
-                $livers .= $livers == '' ? $oliver->id : "," . $oliver->id;
-                $sum_people++;
+        if (isset($info['liver'])) {
+            foreach ($info['liver'] as $liver) {
+                if (isset($liver['checked'])) {
+                    $oliver = Liver::find($liver['checked']);
+                    if ($liver['name'] != '')
+                        $oliver->name = $liver['name'];
+                    if ($liver['idcard'] != '' && strlen($liver['idcard']) == 18)
+                        $oliver->idcard = $liver['idcard'];
+                    if ($liver['phone'] != '')
+                        $oliver->phone = $liver['phone'];
+                    $oliver->save();
+                    $livers .= $livers == '' ? $oliver->id : "," . $oliver->id;
+                    $sum_people++;
+                }
             }
         }
         if (isset($info['new_liver'])) {
