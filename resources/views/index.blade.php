@@ -80,6 +80,7 @@
         }
         .house-item {
             padding-top: 10px;
+            border: 1px solid #efefef;
         }
         .house-item:hover {
             border: 1px solid #c1bcbc;
@@ -243,7 +244,10 @@
             </div>
             <div class="row">
                 @foreach($hotcitys as $cityinfo)
-                    <div class="col-md-3 col-sm-4 col-xs-6 hotcity-item"><img src="/images{{ $cityinfo->pic_path }}" width="100%" alt="{{ $cityinfo->title }}"><a href="{{ url("/show" . $cityinfo->target) }}">{{ $cityinfo->title }}</a></div>
+                    <div class="col-md-3 col-sm-4 col-xs-6 hotcity-item">
+                        <img src="/images{{ $cityinfo->pic_path }}" width="100%" alt="{{ $cityinfo->title }}">
+                        <a href="{{ url("/show" . $cityinfo->target) }}">{{ $cityinfo->title }}</a>
+                    </div>
                 @endforeach
             </div>
         </div>
