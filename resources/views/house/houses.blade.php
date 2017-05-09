@@ -273,7 +273,8 @@
         </div>
     </div>
     <script>
-        $(".gaode-api").css("height", document.body.clientHeight);
+        $(".gaode-api").css("height", document.body.clientHeight - 50);
+        $(".main-content").css('min-height', document.body.clientHeight - 50);
         window.onscroll = function(){
             var scrollTop = document.body.scrollTop;
             var maxHeight = document.body.scrollHeight - document.body.clientHeight - 120;
