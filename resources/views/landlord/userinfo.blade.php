@@ -167,7 +167,13 @@
             <p v-if="!edit"><span>工作：</span>@{{ job }}</p>
         </div>
         <form v-if="edit" id="form-other">
-            <p><span>性别：</span><input type="text" name="sex" id="sex" v-model="sex"></p>
+            <p>
+                <span>性别：</span>
+                <select name="sex" id="sex" v-model="sex">
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </p>
             <p><span>出生日期：</span><input type="text" name="birth" id="birth" v-model="birth"></p>
             <p>
                 <span>所在区域：</span> 中国

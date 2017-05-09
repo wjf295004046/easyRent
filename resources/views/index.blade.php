@@ -80,6 +80,7 @@
         }
         .house-item {
             padding-top: 10px;
+            border: 1px solid #efefef;
         }
         .house-item:hover {
             border: 1px solid #c1bcbc;

@@ -273,8 +273,8 @@
         </div>
     </div>
     <script>
-        $(".gaode-api").css("height", document.body.clientHeight-50);
-	$(".main-content").css("min-height", document.body.clientHeight-50);
+        $(".gaode-api").css("height", document.body.clientHeight - 50);
+        $(".main-content").css('min-height', document.body.clientHeight - 50);
         window.onscroll = function(){
             var scrollTop = document.body.scrollTop;
             var maxHeight = document.body.scrollHeight - document.body.clientHeight - 120;
@@ -303,8 +303,10 @@
         map.on("click", function () {
             map.clearInfoWindow();
         })
-        {{--var mapCity = getCityName('{{ $search_params['city'] }}')--}}
-        {{--map.setCity(mapCity);--}}
+        @if(empty($addresses))
+            var mapCity = getCityName('{{ $search_params['city'] }}')
+            map.setCity(mapCity);
+        @endif
 //        map.clearMap();  // 清除地图覆盖物
         var markers = [
                 @foreach($addresses as $index => $address)
