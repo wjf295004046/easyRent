@@ -122,6 +122,7 @@ class HouseController extends Controller
                     $comments_count['bad']++;
             }
             $favorable_rate = $comments_count['good']*100/array_sum($comments_count);
+            $favorable_rate = round($favorable_rate, 1);
         }
         foreach ($bed_arr as $bed) {
             $temp = explode(':', $bed);
