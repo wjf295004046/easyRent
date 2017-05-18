@@ -109,7 +109,7 @@ class LandlordController extends Controller
         $addresses = Address::where('user_id', Auth::user()->id)->orderBy('created_at')->paginate(15);
         $used_arr = [];
         foreach ($addresses as $address) {
-            $temp = House::where('address_id', $address->id)->first();
+            $temp = House::where('address_id', $address->id)->where('status', '<>', '-1')->first();
             if ($temp)
                 $used_arr[$address->id] = 1;
             else
