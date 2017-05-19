@@ -245,7 +245,7 @@
             <div class="row">
                 @foreach($hotcitys as $cityinfo)
                     <div class="col-md-3 col-sm-4 col-xs-6 hotcity-item">
-                        <img src="/images{{ $cityinfo->pic_path }}" width="100%" alt="{{ $cityinfo->title }}">
+                        <img class="lazy" data-original="/images{{ $cityinfo->pic_path }}" src="/images/common/mrtp.jpg" width="100%" alt="{{ $cityinfo->title }}">
                         <a href="{{ url("/show" . $cityinfo->target) }}">{{ $cityinfo->title }}</a>
                     </div>
                 @endforeach
@@ -260,7 +260,7 @@
                 @foreach($hothouses as $house)
                     <div class="col-md-4 col-sm-6 col-xs-12 house-item">
                         <a href="{{ url("house/" . $house->id) }}">
-                            <img width="100%" src="/images/houses{{ substr($house->pic_path, 0, strpos($house->pic_path, ","))}}.jpg_732x480cw.jpg" alt="">
+                            <img width="100%" class="lazy" data-original="/images/houses{{ substr($house->pic_path, 0, strpos($house->pic_path, ","))}}.jpg_732x480cw.jpg" src="/images/common/mrtp.jpg" alt="">
                         </a>
                         <a href="{{ url("house/" . $house->id) }}">
                             <h4>{{ $addresses[$house->address_id]->city }} <b>·</b> {{ $house->name }}</h4>

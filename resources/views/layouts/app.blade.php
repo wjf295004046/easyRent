@@ -29,11 +29,11 @@
     <script src="/js/carousel.js" type="text/javascript"></script>
     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=9925974522e4301ce20fccac55aab971&plugin=AMap.DistrictSearch"></script>
     <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+    <script src="/js/jquery.lazyload.js?v=1.9.1"></script>
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>
-
     </script>
     <style>
         html,body {
@@ -217,6 +217,9 @@
     <script src="/bootstrap/js/bootstrap-hover-dropdown.min.js"></script>
     {{--<script src="/js/app.js"></script>--}}
     <script>
+        $(function() {
+            $("img.lazy").lazyload({effect: "fadeIn",threshold :100});
+        });
         $(document).ready(function () {
             if ($(document).scrollTop() > 50) {
                 $("#totop").removeClass("hidden");

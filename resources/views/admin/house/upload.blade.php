@@ -29,7 +29,7 @@
         </div>
 
         <div class="col-md-6 text-right">
-            <button type="submit" class="btn btn-success btn-md"><i class="fa fa-plus-circle"></i> 添加权限 </button>
+            <button type="submit" class="btn btn-success btn-md"><i class="fa fa-plus-circle"></i> 审核通过 </button>
         </div>
     </div>
     <div class="row">
